@@ -10,7 +10,8 @@ unsigned long previousMillis = 0;        // will store last time LED was updated
 
 const long interval = 1000;           // interval at which to blink (milliseconds)
 
-void setup() {
+void setup() 
+{
   // set the digital pin as output:
 
   for (int j = 0; j < arraySize; j++)

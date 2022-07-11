@@ -35,13 +35,14 @@ byte static ConvertToFourDigitLed::Clean()
     return 00000000;
 }
 
-char32_t static ConvertToFourDigitLed::ConvertInt(uint8_t number)
+char32_t static ConvertToFourDigitLed::ConvertInt(uint16_t number)
 {
     char32_t result =  0;
 
     uint8_t array[4];
 
     // no need to check negative
+    // this code will never be excercised using uint8_t (max number is 256)
     if (number > 9999)
     {
         for (int i = 0; i < 3; i++)
@@ -53,7 +54,7 @@ char32_t static ConvertToFourDigitLed::ConvertInt(uint8_t number)
     {
         int multiplier = 1000;
 
-        uint8_t dec = number % multiplier;
+        uint16_t dec = number % multiplier;
 
         for (int i = 0; i < 4; i++)
         {
@@ -69,7 +70,7 @@ char32_t static ConvertToFourDigitLed::ConvertInt(uint8_t number)
         }
     }
 
-    // Convert to uint32 (4 bytes)
+    // Convert to char32_t (4 bytes)
     for (int i = 0; i < 3; i++)
     {
         result = result + array[i];

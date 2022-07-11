@@ -13,6 +13,9 @@
 #ifndef FourDigitLed
 #define FourDigitLed
 #include <Arduino.h>
+// Can easily switch <Arduino.h> with the cpp library <cstdint> (has definition for uint8_t but not byte)
+// I am using the Arduino library here for the datatypes 'uint8_t' and 'byte' 
+//  which are equivalent but are used in order to provide clarity
 
 
 /*
@@ -59,8 +62,8 @@ class ConvertToFourDigitLed
     // do I need this?
     byte static Clean();
 
-    // each digit is 1 byte
-    char32_t static ConvertInt(uint8_t number);
+    // each digit is 1 byte, char32_t is 4 bytes
+    char32_t static ConvertInt(uint16_t number);
     char32_t static ConvertFloat(float number);
 };
 

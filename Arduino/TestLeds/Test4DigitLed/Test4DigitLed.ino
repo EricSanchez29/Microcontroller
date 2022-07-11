@@ -1,5 +1,5 @@
-
 #include "FourDigitLed.h"
+#include "ArduinoByteComm.h"
 
               // segment name:  a, b, c, d, e,  f, g, dot
 const int digitSegmentPins[] = {11, 7, 4, 2, 1, 10, 5, 3};
@@ -20,37 +20,33 @@ const long interval = 1000;           // interval at which to blink (millisecond
 
 void setup() 
 {
-  // set all digital pins as output:
+  // Set all digital pins as output:
   for (int i = 0; i < 12; i++)
   {
     pinMode(i, OUTPUT);
   }
 
-  // select the first digit
-  digitalWrite(digitSelectPins[0] - 1, LOW);
-  digitalWrite(digitSelectPins[1] - 1, LOW);
-  digitalWrite(digitSelectPins[2] - 1, LOW);
-  digitalWrite(digitSelectPins[3] - 1, LOW);
 
-  // write the number 8, with a dot
 
-  for (int i = 0; i < 8; i++)
-  {
-    digitalWrite(digitSegmentPins[i] - 1, HIGH);
-  }
-  
+  // Select the first digit
+//  SelectDigit(ConvertToFourDigitLed::SelectDigit((uint8_t)1));
+
+  // Write the number 8
+  //WriteByte(ConvertToFourDigitLed::ConvertInt((uint16_t)8));
 }
 
 void loop() 
 {
-  
-  // here is where you'd put code that needs to be running all the time.
-
   //unsigned long currentMillis = millis();
 
-  byte a = ConvertToFourDigitLed::SelectDigit(1);
-  byte b = ConvertToFourDigitLed::ConvertInt(3);
 
+  byte a = ConvertToFourDigitLed::SelectDigit(1);
+  byte b = ConvertToFourDigitLed::ConvertInt(8);
+
+
+
+
+/*
   int A = int(a);
   int B = int(b);
 
@@ -58,20 +54,17 @@ void loop()
   Serial.println(a);
   Serial.println(A);
   Serial.println(B);
+*/
+
+
+  ArduinoByteComm comm = ArduinoByteComm::ArduinoByteComm(4, 11);
+
+  //select digit 1;
+
+  digitalWrite(0, HIGH);
 
   
 
-}
+  comm.Write(b);
 
-// hard coding this to certain pin number
-// may want to create a library that lets you custom select the range of pin
-// that you want to use to write a byte
-void WriteByte(byte message)
-{
-  
-  
-  for (int i = 0; i < 8; i ++)
-  {
-    //Wr
-  }
 }
