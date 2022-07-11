@@ -1,5 +1,7 @@
 
-                 // segment name:  a, b, c, d, e,  f, g, dot
+#include "FourDigitLed.h"
+
+              // segment name:  a, b, c, d, e,  f, g, dot
 const int digitSegmentPins[] = {11, 7, 4, 2, 1, 10, 5, 3};
 
        // digits left to right:  1, 2, 3, 4
@@ -14,9 +16,6 @@ const int digitSelectPins[] = { 12, 9, 8, 6};
 unsigned long previousMillis = 0;        // will store last time LED was updated
 
 const long interval = 1000;           // interval at which to blink (milliseconds)
-
-
-
 
 
 void setup() 
@@ -47,36 +46,32 @@ void loop()
   
   // here is where you'd put code that needs to be running all the time.
 
-  // check to see if it's time to blink the LED; that is, if the difference
-  // between the current time and last time you blinked the LED is bigger than
-  // the interval at which you want to blink the LED.
-  
   //unsigned long currentMillis = millis();
-/*
-  if (currentMillis - previousMillis >= interval) 
+
+  byte a = ConvertToFourDigitLed::SelectDigit(1);
+  byte b = ConvertToFourDigitLed::ConvertInt(3);
+
+  int A = int(a);
+  int B = int(b);
+
+  Serial.begin(9600);
+  Serial.println(a);
+  Serial.println(A);
+  Serial.println(B);
+
+  
+
+}
+
+// hard coding this to certain pin number
+// may want to create a library that lets you custom select the range of pin
+// that you want to use to write a byte
+void WriteByte(byte message)
+{
+  
+  
+  for (int i = 0; i < 8; i ++)
   {
-    // save the last time you blinked the LED
-    previousMillis = currentMillis;
-
-    for (int i = 0; i < 5; i++)
-    {
-      
-      if (ledState[i] == LOW) 
-      {
-        ledState[i] = HIGH;
-      } else 
-      {
-        ledState[i] = LOW;
-      }
-
-      digitalWrite(i, ledState[i]);
-    }
-*/
-    
-    // if the LED is off turn it on and vice-versa:
-    
-
-    // set the LED with the ledState of the variable:
-    
- // }
+    //Wr
+  }
 }
