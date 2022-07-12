@@ -45,7 +45,6 @@ bool ArduinoByteComm::_getPinData(byte data, uint8_t bit)
     return filtered>>(7-bit);
 }
 
-
 byte ArduinoByteComm::Read()
 {
     byte result;
