@@ -7,6 +7,7 @@
 #define ArduinoWrite
 #include <Arduino.h>
 
+
 class ArduinoByteComm
 {
   public:

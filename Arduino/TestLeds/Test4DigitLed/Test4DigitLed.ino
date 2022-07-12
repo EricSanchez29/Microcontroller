@@ -1,7 +1,6 @@
 #include "FourDigitLed.h"
 #include "ArduinoByteComm.h"  
 
-
 /*
  * // Instead of mapping wires here, just connect them so the ports line up where the segement lines are threated as a byte
  *                                                                                and the control lines are treated as half a byte
@@ -26,23 +25,23 @@ void setup()
     pinMode(i, OUTPUT);
   }
 
-  Serial.begin(9600);
-  Serial.println("wtf");
+  //Serial.begin(9600);
+  //Serial.println("wtf");
 
   // loggin is messed up because it uses pin 0 and 1
   
-  delay(3000);
 
-  ArduinoByteComm comm = ArduinoByteComm::ArduinoByteComm(4, 11);
+  
 
   // select digit (least significant figure)
-  digitalWrite(0, true);
-  digitalWrite(1, true);
-  digitalWrite(2, true);
-  digitalWrite(3, false);
+  //digitalWrite(0, true);
+  //digitalWrite(1, true);
+  //digitalWrite(2, true);
+  //digitalWrite(3, false);
 
+  FourDigitLed led = FourDigitLed::FourDigitLed(0, 11);
 
-
+  led.Write(6);
 /*
   // 7
   digitalWrite(4, true);
@@ -60,19 +59,19 @@ void setup()
   
 
   // "7" -> 
-  comm.Write(B11100000);
-  delay(2000);
+  //comm.Write(B11100000);
+  //delay(2000);
 
 
   // 7 gets converted to B10000000
 
-  int a = ConvertToFourDigitLed::ConvertInt(7);
+ // int a = FourDigitLed::ConvertInt(7);
 
-  Serial.println(a, BIN);
+  //Serial.println(a, BIN);
   
-  comm.Write(a);
+  //comm.Write(a);
 
-  delay(2000);
+  //delay(2000);
 
 
   // A

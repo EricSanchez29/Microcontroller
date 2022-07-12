@@ -1,13 +1,38 @@
 #include "FourDigitLed.h"
+#include "ArduinoByteComm.h"  
+
+FourDigitLed::FourDigitLed(int firstNumber, int lastNumber)
+{
+
+    // figure out how to do half byte comm?
+
+    digitalWrite(0, true);
+    digitalWrite(1, true);
+    digitalWrite(2, true);
+    digitalWrite(3, false);
+
+    //_comm = ArduinoByteComm::ArduinoByteComm();
+    _comm = ArduinoByteComm::ArduinoByteComm(4, 11);
+}
+
+void FourDigitLed::Write(uint16_t number)
+{
+    
+
+    _comm.Write()
+    _comm.Write()
+    _comm.Write()
+    _comm.Write()
+}
 
 // All pins LOW -> all pins selected
-byte ConvertToFourDigitLed::SelectAllDigits()
+byte FourDigitLed::selectAllDigits()
 {
    return 00000000;
 }
 
 // 1 pin LOW, rest of pins HIGH -> 1 pin selected
-byte ConvertToFourDigitLed::SelectDigit(uint8_t digit)
+byte FourDigitLed::selectDigit(uint8_t digit)
 {
     // can I use a half byte data type instead?
     switch(digit) 
@@ -30,12 +55,12 @@ byte ConvertToFourDigitLed::SelectDigit(uint8_t digit)
 }
 
 // All segments LOW
-byte static ConvertToFourDigitLed::Clean()
+byte static FourDigitLed::Clean()
 {
     return 00000000;
 }
 
-char32_t static ConvertToFourDigitLed::ConvertInt(uint16_t number)
+char32_t FourDigitLed::convertInt(uint16_t number)
 {
     char32_t result =  0;
 
@@ -83,7 +108,7 @@ char32_t static ConvertToFourDigitLed::ConvertInt(uint16_t number)
     return result;
 }
 
-char32_t ConvertToFourDigitLed::ConvertFloat(float number)
+char32_t FourDigitLed::convertFloat(float number)
 {
     return 0;
 }
