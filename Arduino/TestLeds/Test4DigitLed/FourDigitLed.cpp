@@ -7,10 +7,10 @@ byte ConvertToFourDigitLed::SelectAllDigits()
 }
 
 // 1 pin LOW, rest of pins HIGH -> 1 pin selected
-byte ConvertToFourDigitLed::SelectDigit(byte dig)
+byte ConvertToFourDigitLed::SelectDigit(uint8_t digit)
 {
     // can I use a half byte data type instead?
-    switch(dig) 
+    switch(digit) 
     {
         case 1 :
         return B00001110;

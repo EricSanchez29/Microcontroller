@@ -38,7 +38,6 @@ Digit selection is a half byte:
   1110 for digit 1
   1101 for digit 2
 */
-// is this in the right place?
 const uint8_t _segmentCodes[] = 
 {
       B11111100, // 0

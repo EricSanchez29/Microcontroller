@@ -2,7 +2,7 @@
 
 // Pins 0-12 (nano doesn't have pin 13)
 // need to create another constructor for more custom mapping
-ArduinoByteComm::ArduinoByteComm(uint8_t firstPin, uint8_t lastPin)
+ArduinoByteComm::ArduinoByteComm(int firstPin, int lastPin)
 {
     if (lastPin - firstPin != 7)
     {
@@ -13,6 +13,7 @@ ArduinoByteComm::ArduinoByteComm(uint8_t firstPin, uint8_t lastPin)
 
     for (int i = firstPin; i <= lastPin; i++)
     {
+        //Serial.println(i);
         _pinMap[j] = i;
         j++;
     }
@@ -24,14 +25,15 @@ ArduinoByteComm::ArduinoByteComm(uint8_t firstPin, uint8_t lastPin)
 
 void ArduinoByteComm::Write(byte data)
 {
-    for (int i = 0; i < 8; i++)
+    //Serial.println();
+    //Serial.print("data: ");
+    //Serial.print(data, BIN);
+    
+    for (uint8_t i = 0; i < 8; i++)
     {
         uint8_t pin = _pinMap[i];
-
-        bool pinData = _getPinData(data, i);
-
         pinMode(pin, OUTPUT);
-        digitalWrite(pin, pinData);
+        digitalWrite((int)pin, _getPinData(data, i));
     }
     
    return;
@@ -40,9 +42,17 @@ void ArduinoByteComm::Write(byte data)
 // no error handling "cross your fingers"
 bool ArduinoByteComm::_getPinData(byte data, uint8_t bit)
 {
-    byte filtered = data ^ _bitMask[bit];
+    data = data>>(7-bit);
 
-    return filtered>>(7-bit);
+    // bit make this bit
+    data = data ^ B11111110;
+
+    if (data & B00000001)
+    {
+        return  true;
+    }
+
+    return false;
 }
 
 byte ArduinoByteComm::Read()
