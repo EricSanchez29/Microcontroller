@@ -12,7 +12,7 @@
 
 #ifndef FourDigitLedLib
 #define FourDigitLedLib
-#include "ArduinoByteComm.h"
+#include "ArduinoComm.h"
 #include <Arduino.h>
 // Can easily switch <Arduino.h> with the cpp library <cstdint> (has definition for uint8_t but not byte)
 // I am using the Arduino library here for the datatypes 'uint8_t' and 'byte' 
@@ -50,26 +50,29 @@ const uint8_t _segmentCodes[] =
       B10111110, // 6
       B11100000, // 7
       B11111110, // 8
-      B11110110  // 9
+      B11110110, // 9
+      B00000001  // .
 };
 
 class FourDigitLed 
 {
   public:
 
+    FourDigitLed();
+
     FourDigitLed(int firstPin, int lastPin);
 
     void Write(uint16_t number);
 
-    byte Clean();
+    void ClearScreen();
 
   private:
-    // each digit is 1 byte, char32_t is 4 bytes
-    char32_t convertInt(uint16_t number);
-    char32_t convertFloat(float number);
-    byte selectAllDigits();
-    byte selectDigit(uint8_t digit);
-    ArduinoByteComm _comm;
+    // each digit is 1 byte
+    uint8_t* convertInt(uint16_t number);
+
+    void selectDigit(uint8_t digit);
+
+    ArduinoComm _comm;
 };
 
 #endif
