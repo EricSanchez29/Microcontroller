@@ -1,13 +1,7 @@
 
 /*
-  Made for a 12 pin, 4 LED display
-  NFD-5641AS
- 
-  Adapted from a libary which uses //#include <Arduino.h>
-
-  I don't want to have a dependency on arduino here, is there any conversion I need to do
-  in the .ino file?
-
+  Made for a 12 pin, 4 digit LED display
+  (NFD-5641AS)
 */
 
 #ifndef FourDigitLedLib
@@ -15,29 +9,25 @@
 #include "ArduinoComm.h"
 #include <Arduino.h>
 // Can easily switch <Arduino.h> with the cpp library <cstdint> (has definition for uint8_t but not byte)
-// I am using the Arduino library here for the datatypes 'uint8_t' and 'byte' 
-//  which are equivalent but are used in order to provide clarity
-
 
 /*
-
-4 digit LED segments
-  ___     ___
-F| A |B  |   |
-  ___     ___
-E| G |C  |   |
-  ___     ___   ...
-   D  *H
+      ___     ___     ___    ___
+    F| A |B  |   |   |   |  |   |
+      ___     ___     ___    ___
+    E| G |C  |   |   |   |  |   |
+      ___     ___     ___    ___
+      D  *H
    
- Digit 1 Digit 2 Digit 3 Digit 4
+ Digit: 1      2       3      4
 
 Digit data is a byte = ABCDEFGH
-  can add dot to any digit 0-9
-
+  can add dot to any integer 0-9
 
 Digit selection is a half byte:
   1110 for digit 1
   1101 for digit 2
+  1011 for digit 3
+  1110 for digit 4
 */
 const uint8_t _segmentCodes[] = 
 {

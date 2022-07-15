@@ -15,7 +15,6 @@ class ArduinoComm
     // board is connected from firstPin throught lastPin
     // where the first pin, it the most significant bit in the byte
 
-    //Required
     ArduinoComm();
 
     ArduinoComm(int firstPin, int lastPin);

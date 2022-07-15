@@ -3,8 +3,8 @@
 // Need default constructor 
 ArduinoComm::ArduinoComm(){}
 
-// Pins 0-12 (nano doesn't have pin 13)
-// Ceate another constructor for more custom mapping?
+// Pins 0-12 (Arduino Nano doesn't have pin 13 or 14, so I'm using the tx/rx lines)
+// Create another constructor for more custom mapping?
 ArduinoComm::ArduinoComm(int firstPin, int lastPin)
 {
     if (lastPin - firstPin != 7)
