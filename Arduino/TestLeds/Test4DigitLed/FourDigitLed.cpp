@@ -11,6 +11,7 @@ FourDigitLed::FourDigitLed(int firstNumber, int lastNumber)
     // no digit selected
     for (int i = 0; i < 4; i++)
     {
+        pinMode(i, OUTPUT);
         digitalWrite(i, true);
     }
 
@@ -33,7 +34,7 @@ void FourDigitLed::Write(uint16_t number)
             selectDigit(i+1);
             
             _comm.Write(data[i]);
-            delay(1);
+            delay(3);
         }
     }
 }
@@ -87,13 +88,16 @@ void static FourDigitLed::ClearScreen()
 {
     for (int i = 0; i < 4; i++)
     {
+        // alternatively I could set these to false
         digitalWrite(i, true);
     }
         
-    // redundant?
-    // does ensure that all byte lines are LOW 
-    // before exitting this function;
+    // Is this redundant?
+    // This does ensure that all byte lines are LOW 
+    // before exiting this function;
     _comm.Write(B00000000);
+
+    
 }
 
 uint8_t* FourDigitLed::convertInt(uint16_t number)

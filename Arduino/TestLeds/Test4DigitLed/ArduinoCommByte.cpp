@@ -1,11 +1,11 @@
-#include "ArduinoComm.h"  
+#include "ArduinoCommByte.h"  
 
 // Need default constructor 
-ArduinoComm::ArduinoComm(){}
+ArduinoCommByte::ArduinoCommByte(){}
 
-// Pins 0-12 (Arduino Nano doesn't have pin 13 or 14, so I'm using the tx/rx lines)
+// Pins 0-12 (Arduino Nano doesn't have pin 13 or 14, so I'm using the tx/rx pins (1 & 0))
 // Create another constructor for more custom mapping?
-ArduinoComm::ArduinoComm(int firstPin, int lastPin)
+ArduinoCommByte::ArduinoCommByte(int firstPin, int lastPin)
 {
     if (lastPin - firstPin != 7)
     {
@@ -23,7 +23,7 @@ ArduinoComm::ArduinoComm(int firstPin, int lastPin)
     return;
 }
 
-void ArduinoComm::Write(byte data)
+void ArduinoCommByte::WriteByte(byte data)
 {    
     for (uint8_t i = 0; i < 8; i++)
     {
@@ -35,7 +35,7 @@ void ArduinoComm::Write(byte data)
    return;
 }
 
-bool ArduinoComm::_getPinData(byte data, uint8_t bit)
+bool ArduinoCommByte::_getPinData(byte data, uint8_t bit)
 {
     data = data>>(7-bit);
 
@@ -49,7 +49,8 @@ bool ArduinoComm::_getPinData(byte data, uint8_t bit)
     return false;
 }
 
-byte ArduinoComm::Read()
+// need to test this
+byte ArduinoCommByte::ReadByte()
 {
     byte result;
 
