@@ -6,7 +6,8 @@
 
 #ifndef FourDigitLedLib
 #define FourDigitLedLib
-#include "ArduinoComm.h"
+#include "ArduinoCommByte.h"
+#include "ArduinoCommNybl.h"
 #include <Arduino.h>
 // Can easily switch <Arduino.h> with the cpp library <cstdint> (has definition for uint8_t but not byte)
 
@@ -62,7 +63,8 @@ class FourDigitLed
 
     void selectDigit(uint8_t digit);
 
-    ArduinoComm _comm;
+    ArduinoCommByte _digitData;
+    ArduinoCommNybl _digitSelect;
 };
 
 #endif

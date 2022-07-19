@@ -3,25 +3,24 @@
   8 pin (1-byte) digital read/write
 */
 
-#ifndef ArduinoWrite
-#define ArduinoWrite
 #include <Arduino.h>
-
-
-class ArduinoComm
+#ifndef ArduinoByte
+#define ArduinoByte
+class ArduinoCommByte
 {
   public:
     // currently only supports sequential pins
     // board is connected from firstPin throught lastPin
     // where the first pin, it the most significant bit in the byte
 
-    ArduinoComm();
+    ArduinoCommByte();
 
-    ArduinoComm(int firstPin, int lastPin);
-    
-    void Write(byte data);
+    ArduinoCommByte(int firstPin, int lastPin);
 
-    byte Read();
+    //B:ABCDEFGH
+    void WriteByte(byte data);
+
+    byte ReadByte();
 
   private:
     uint8_t _pinMap[8];
@@ -30,5 +29,4 @@ class ArduinoComm
     // byte and uint8_t are technically equivalent
     bool _getPinData(byte data, uint8_t bit);
 };
-
 #endif
