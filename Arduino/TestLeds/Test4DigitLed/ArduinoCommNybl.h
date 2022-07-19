@@ -1,10 +1,11 @@
-/*
+  /*
   Made for Arduino (nano or uno) [currently doesn't support pin 13]
   4 pin (half-byte) digital read/write
 */
 
 #include <Arduino.h>
-
+#ifndef ArduinoNybl
+#define ArduinoNybl
 class ArduinoCommNybl
 {
   public:
@@ -15,7 +16,8 @@ class ArduinoCommNybl
     ArduinoCommNybl();
 
     ArduinoCommNybl(int firstPin, int lastPin);
-    
+
+    //B:xxxxB0B1B2B3
     void WriteNybl(byte data);
 
     byte ReadNybl();
@@ -27,5 +29,4 @@ class ArduinoCommNybl
     // byte and uint8_t are technically equivalent
     bool _getPinData(byte data, uint8_t bit);
 };
-
 #endif

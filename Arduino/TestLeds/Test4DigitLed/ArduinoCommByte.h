@@ -4,7 +4,8 @@
 */
 
 #include <Arduino.h>
-
+#ifndef ArduinoByte
+#define ArduinoByte
 class ArduinoCommByte
 {
   public:
@@ -15,7 +16,8 @@ class ArduinoCommByte
     ArduinoCommByte();
 
     ArduinoCommByte(int firstPin, int lastPin);
-    
+
+    //B:ABCDEFGH
     void WriteByte(byte data);
 
     byte ReadByte();
@@ -27,5 +29,4 @@ class ArduinoCommByte
     // byte and uint8_t are technically equivalent
     bool _getPinData(byte data, uint8_t bit);
 };
-
 #endif
