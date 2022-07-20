@@ -1,4 +1,5 @@
-#include "ArduinoComm.h"
+#include "ArduinoCommByte.h"
+#include "ArduinoCommNybl.h"
 #include "FourDigitLed.h"
 
 void setup() 
@@ -15,6 +16,7 @@ void setup()
   led.Write(8);
   led.Write(89);
   led.Write(898);
+  led.Write(808);
   led.Write(1234);
 }
 
