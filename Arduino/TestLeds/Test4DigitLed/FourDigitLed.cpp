@@ -31,7 +31,7 @@ void FourDigitLed::Write(uint16_t number)
             selectDigit(i+1);
             _digitData.WriteByte(data[i]);
             delay(5);
-            ClearSceen();
+            ClearScreen();
         }
     }
 }
@@ -87,6 +87,7 @@ uint8_t* FourDigitLed::convertInt(uint16_t number)
     }
     else
     {
+        bool firstDisplayed = false; // first digit has already been displayed
         uint16_t divisor = 1000;
         uint16_t quotient = 0;
 
@@ -99,15 +100,20 @@ uint8_t* FourDigitLed::convertInt(uint16_t number)
                 someArray[i] = _segmentCodes[quotient];
 
                 number = number - (quotient * divisor);
-            }
-            // if there is nothing left to divide make the rest of the segments 0
-            else if(number == 0)
-            {
-                someArray[i] = _segmentCodes[0];
+
+                firstDisplayed = true;
             }
             else
             {
-                someArray[i] = B00000000;
+                if(!firstDisplayed)
+                {
+                    someArray[i] = B00000000;
+                }
+                else
+                {
+                    someArray[i] = _segmentCodes[0];
+                    
+                }
             }
 
             divisor = divisor / 10;
