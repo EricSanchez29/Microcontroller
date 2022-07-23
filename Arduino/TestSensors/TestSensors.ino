@@ -18,6 +18,11 @@ void setup()
 
 void loop()
 {
+  //int digitalInputPin = 12;
+  
+  //pinMode(digitalInputPin, INPUT);
+  //led.Write(digitalRead(digitalInputPin));
+  
   //Serial.println(analogRead(0));
 
   led.Write((uint16_t)analogRead(0));
