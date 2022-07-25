@@ -27,9 +27,9 @@ void FourDigitLed::Write(uint16_t number)
         // since each digit in the LED screen
         // shares data lines, need to switch between them quickly
         for (int8_t i = 0; i < 4; i++)
-        {
-            selectDigit(i+1);
+        {    
             _digitData.WriteByte(data[i]);
+            selectDigit(i+1);
             delay(5);
             ClearScreen();
         }
