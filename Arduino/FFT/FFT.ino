@@ -1,8 +1,7 @@
 #include "FourierTransform.h"
-#include "SignalGenerator.h"
-#include "ArduinoCommByte.h"
-#include "ArduinoCommNybl.h"
-#include "FourDigitLed.h" 
+//#include "ArduinoCommByte.h"
+//#include "ArduinoCommNybl.h"
+//#include "FourDigitLed.h" 
 
 /*
     Right now I am just seeing how much space this takes up when its compiled for arduino
@@ -16,30 +15,50 @@
 */
 
 
+//FourDigitLed led;
+uint16_t analogSignal[128];
+
 void setup() 
-{
-    uint16_t* wave_time; 
-    uint16_t* wave_freq;
-    uint8_t i;
-
+{ 
     Serial.begin(9600);
+    
+    //led = FourDigitLed::FourDigitLed(0, 11);
 
-    wave_time = SignalGenerator::GetWaveForm(8, 511.5);
+    // overflow
+    //led.Write(10000);
+    //led.ClearScreen();
 
-    for (i = 0; i < 128; i++)
+    Serial.println("Start Reading");
+    //Serial.println(analogRead(0));
+    for (int i = 0; i < 128; i++)
     {
-        Serial.println(wave_time[i]);
+      // add delay to have measurements in the ranges of 100 - 900 Hz
+      delay(20);
+      analogSignal[i] = analogRead(0);
     }
+    Serial.println("End Reading");
 
-    wave_freq = FourierTransform::GetDFT(wave_time);
+    int32_t* waveFreq;
 
-    for (i = 0; i < 128; i++)
+    waveFreq = FourierTransform::DFT(analogSignal);
+    Serial.println("Time signal");
+    for (int j = 0; j < 128; j++)
     {
-        Serial.println(wave_freq[i]);
+      //led.Write(analogSignal[j]);
+      Serial.println(analogSignal[j]);
     }
+    Serial.println("Freq Signal");
+  for (int j = 0; j < 128; j++)
+  {
+//    led.Write(analogSignal[j]);
+    Serial.println(waveFreq[j]);
+  }
+
+
+  Serial.println(FourierTransform::GetPeakFrequency(waveFreq));
+    //led.Write(FourierTransform::GetPeakFrequency(waveFreq));
 }
 
-void loop() 
-{ 
-  
+ void loop()
+{
 }

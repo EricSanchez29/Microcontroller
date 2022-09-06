@@ -4,9 +4,11 @@
 
 FourDigitLed led;
 
+int analogSignal[128];
+
 void setup()
 {
-  //Serial.begin(9600);
+  Serial.begin(9600);
 
   led = FourDigitLed::FourDigitLed(0, 11);
 
@@ -19,6 +21,15 @@ void setup()
 void loop()
 {
   //Serial.println(analogRead(0));
+  for (int i = 0; i < 128; i++)
+  {
+    analogSignal[i] = analogRead(0);
+  }
+  
+  for (int j = 0; j < 128; j++)
+  {
+    //led.Write(analogSignal[j]);
+    Serial.println(analogSignal[j]);
+  }
 
-  led.Write((uint16_t)analogRead(0));
 }
