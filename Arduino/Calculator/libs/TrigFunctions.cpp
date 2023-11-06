@@ -37,7 +37,8 @@ double TrigFunctions::Cosine(double theta)
 
 double TrigFunctions::lookupValue(double phi)
 {
-    
+    int index = (int)(phi * 10);
 
-    return 0.0;
+    // table has 158 values;
+    return _cosineValues[index];
 }
