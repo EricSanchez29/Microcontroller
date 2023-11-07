@@ -169,6 +169,24 @@ const double _cosineValues[158] =
 
 };
 
+
+/*
+    The idea behind this was presented in a Youtube video by Kaze Emanuar
+    He used this method of computing trig functions on an N64 which had limited memory and
+    who's system had to make many of these simple calculations for graphics
+
+    The idea of this implementation is to store only the values from the first quarter of the 
+    cosine wave (0 through pi/2) and merely flip them appropriately for the other quarters (pi/2 through 2pi)
+
+    I was planning on running this code on an arduino but there are some drawbacks from 
+    using the platform (no doubles and so low very low precision, 2 decimal places after period)
+    and their own cos implementation was much faster. I had an error of 0.1 for some values that were
+    not in the first quarter, I attribute this to the precision of the table values themselves, i think
+    a higher precision on values (and thus a larger table) would mean less errors.
+
+    I may eventually change this with some other datatype which would allow greater precision
+    on the arduino, like some kind of decimal datatype that I create myself
+*/
 class TrigFunctions
 {
   public:
