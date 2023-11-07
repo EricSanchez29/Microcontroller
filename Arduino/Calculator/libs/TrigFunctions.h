@@ -176,6 +176,7 @@ class TrigFunctions
     // theta is in radians
     static double Cosine(double theta);
 
+    // used to signal the class is static
     TrigFunctions() = delete;
 
   private:

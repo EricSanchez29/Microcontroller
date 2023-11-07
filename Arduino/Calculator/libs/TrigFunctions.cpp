@@ -3,32 +3,51 @@
 double TrigFunctions::Cosine(double theta)
 {
     // do I want to support any value?
-    if ( (theta < 0) && (theta > twoPi))
+    if ( (theta < 0) && (theta >= twoPi))
     {
         return 100;
     }
+    // use to mod (theta mod 2pi)
 
-    if (theta <= halfPi)
+    if (theta < halfPi)
     {
         return lookupValue(theta);
     }
-    else if ((theta > halfPi) && (theta < (my_pi)))
+    else if ((theta >= halfPi) && (theta < (my_pi)))
     {
         theta = theta - halfPi;
 
         theta = halfPi - theta;
 
-        return lookupValue(theta) * -1;
+         double value = lookupValue(theta);
+
+        // To avoid returning -0
+        if (value == 0)
+        {
+            return 0;
+        }
+
+        return  value * -1;
     }
-    else if ((theta > halfPi) && (theta < (my_pi)))
+    else if ((theta >= my_pi) && (theta < (my_pi + halfPi)))
     {
         theta = theta - my_pi;
 
-        return lookupValue(theta) * -1;
+        double value = lookupValue(theta);
+
+        // To avoid returning -0
+        if (value == 0)
+        {
+            return 0;
+        }
+
+        return  value * -1;
     }
-    else // 3pi/2 < theta <= 2pi
+    else // 3pi/2 <= theta < 2pi
     {
         theta = theta - my_pi - halfPi;
+
+        theta = halfPi - theta;
 
         return lookupValue(theta);
     }
@@ -37,7 +56,7 @@ double TrigFunctions::Cosine(double theta)
 
 double TrigFunctions::lookupValue(double phi)
 {
-    int index = (int)(phi * 10);
+    int index = (int)(phi * 100) + 1;
 
     // table has 158 values;
     return _cosineValues[index];
